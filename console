@@ -1,0 +1,27 @@
+#!/usr/bin/env php
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
+use Framework\CLI\CLI;
+use Framework\CLI\Command;
+use Framework\CLI\Console;
+use Framework\HTTP\Client\Client;
+use Framework\HTTP\Client\Request;
+
+class MyIP extends Command
+{
+    protected string $description = 'Shows my IP address.';
+
+    public function run() : void
+    {
+        $client = new Client();
+        $request = new Request('https://api.ipify.org?format=json');
+        $response = $client->run($request);
+        $json = $response->getJson();
+        CLI::write('My IP is: ' . $json->ip);
+    }
+}
+
+$console = new Console();
+$console->addCommand(MyIP::class);
+$console->run();

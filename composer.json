@@ -1,0 +1,6 @@
+{
+    "require": {
+        "aplus/cli": "^2.3",
+        "aplus/http-client": "^4.2"
+    }
+}
